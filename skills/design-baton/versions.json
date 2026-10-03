@@ -1,0 +1,12 @@
+{
+  "manifest_format": 1,
+  "bundle_version": "0.1.0",
+  "components": {
+    "session-lifecycle": {"version": "0.1.0", "path": "references/playbooks/session-lifecycle.md"},
+    "decisions-tree": {"version": "0.1.0", "path": "references/playbooks/decisions-tree.md"},
+    "snapshots": {"version": "0.1.0", "path": "references/playbooks/snapshots.md"},
+    "upgrades": {"version": "0.1.0", "path": "references/playbooks/upgrades.md"},
+    "workspace-format": {"version": "0.1.0", "path": "references/workspace-format.md"},
+    "toolkit": {"version": "0.1.0", "path": "scripts/baton.py"}
+  }
+}

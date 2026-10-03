@@ -1,0 +1,27 @@
+{
+  "workspace_format": "0.1.0",
+  "project": {
+    "slug": "community-workshop",
+    "title": "Community repair workshop"
+  },
+  "procedure": {
+    "repository": "https://github.com/jimzord12/design-baton",
+    "bundle_version": "0.1.0",
+    "release_tag": "v0.1.0",
+    "commit": "1111111111111111111111111111111111111111",
+    "entry_path": "skills/design-baton/SKILL.md",
+    "fixture": true
+  },
+  "snapshot": {
+    "number": 1,
+    "predecessor": null,
+    "prepared_on": "2026-10-03",
+    "export_status": "prepared"
+  },
+  "active_slice": {
+    "id": "schedule-1",
+    "subject": "subjects/schedule.md",
+    "target": "Settle duration and arrival arrangement",
+    "discovery": "declined"
+  }
+}

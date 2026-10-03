@@ -1,0 +1,28 @@
+{
+  "workspace_format": "0.1.0",
+  "project": {
+    "slug": "sample-project",
+    "title": "Volunteer intake application"
+  },
+  "procedure": {
+    "repository": "https://github.com/jimzord12/design-baton",
+    "bundle_version": "0.1.0",
+    "release_tag": "v0.1.0",
+    "commit": "1111111111111111111111111111111111111111",
+    "entry_path": "skills/design-baton/SKILL.md",
+    "fixture": true
+  },
+  "snapshot": {
+    "number": 1,
+    "predecessor": null,
+    "prepared_on": "2026-10-03",
+    "export_status": "prepared"
+  },
+  "active_slice": {
+    "id": "intake-1",
+    "subject": "subjects/intake.md",
+    "target": "Choose the minimum intake fields",
+    "map": "maps/intake.json",
+    "discovery": "accepted"
+  }
+}

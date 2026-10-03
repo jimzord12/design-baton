@@ -1,0 +1,23 @@
+name: Validate Design Baton
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.10', '3.13']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests -v
+      - run: python skills/design-baton/scripts/baton.py validate-bundle
+      - run: python skills/design-baton/scripts/baton.py validate-workspace examples/sample-project --allow-fixture
+      - run: python skills/design-baton/scripts/baton.py validate-workspace examples/community-workshop --allow-fixture
+      - run: python skills/design-baton/scripts/baton.py package-skill --date 2026-10-03 --output-dir dist

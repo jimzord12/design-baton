@@ -1,0 +1,32 @@
+{
+  "map_format": "0.1.0",
+  "slice_id": "intake-1",
+  "target": "Choose the minimum intake fields",
+  "complete": true,
+  "branches": [
+    {
+      "id": "b-intake",
+      "title": "Minimum intake",
+      "leaves": [
+        {
+          "id": "l-fields",
+          "question": "Which fields are necessary?",
+          "required": true,
+          "status": "resolved",
+          "decisions": [
+            "D-001"
+          ],
+          "future_branch": false
+        },
+        {
+          "id": "l-reminders",
+          "question": "Should later design include automatic reminders?",
+          "required": false,
+          "status": "deferred",
+          "rationale": "Reminders are unnecessary to settle the intake fields; revisit only in an explicitly selected later slice.",
+          "future_branch": true
+        }
+      ]
+    }
+  ]
+}
