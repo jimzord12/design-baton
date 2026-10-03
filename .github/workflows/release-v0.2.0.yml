@@ -1,0 +1,46 @@
+name: Publish Design Baton v0.2.0
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/release-v0.2.0.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: publish-design-baton-v0.2.0
+  cancel-in-progress: false
+jobs:
+  validate:
+    # This route publishes only the specifically requested release.
+    if: >-
+      github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'feat: add slice-close improvement review for v0.2.0'
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.10', '3.13']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests -v
+      - run: python skills/design-baton/scripts/baton.py validate-bundle
+      - run: python skills/design-baton/scripts/baton.py validate-workspace examples/sample-project --allow-fixture
+      - run: python skills/design-baton/scripts/baton.py validate-workspace examples/community-workshop --allow-fixture
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Publish exact tested commit and verify downloaded assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/release_v020.py --date 2026-10-03 --commit "$GITHUB_SHA"

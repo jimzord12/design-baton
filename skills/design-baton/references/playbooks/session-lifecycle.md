@@ -55,6 +55,12 @@ Archived maps retain their discovery authorization and stable IDs.
 Judge completion against the target, not the existence of a ZIP or a checked
 box. A slice may complete with explicit nonessential deferrals. Required open or
 deferred decisions prevent completion. Check for omitted necessary decisions too.
+Before announcing slice closure, follow [Skill improvement](skill-improvement.md)
+for a brief review of observed procedure friction and useful enhancements.
+Discuss worthwhile findings, show the exact public-safe issue draft, and file only
+after owner approval. Preserve pending feedback without blocking an otherwise
+complete slice; approval to file does not authorize implementation.
+
 Announce completion and the recommended next slice; selection and discovery
 authorization remain separate. Established decisions provide context unless the
 owner intentionally reopens one.

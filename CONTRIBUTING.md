@@ -50,3 +50,30 @@ covers readable data, decision/discovery authority, session guarantees and CLI.
 
 For long notes use `gh release create ... --notes-file <UTF-8 file>`.
 Only bundle GitHub Releases are needed; no per-protocol release pipeline.
+
+
+## v0.2.0 publisher
+
+The version-specific workflow release-v0.2.0.yml exists for the explicitly
+owner-authorized v0.2.0 publication. Its push trigger is limited to changes to
+that workflow on main with the specified release commit message; it is not an
+auto-publisher for unrelated future work. A manual workflow run is also possible.
+The manifest must be 0.2.0, the checkout must match main, and an existing release
+is never overwritten. The publisher refuses moving an existing tag.
+
+For offline candidate preparation only:
+
+```sh
+python scripts/release_v020.py --date YYYY-MM-DD --commit FULL_COMMIT --prepare-only
+```
+
+To finish this specific authorized publication from a clean checkout at the
+intended commit, with authenticated Git/gh access:
+
+```sh
+python scripts/release_v020.py --date YYYY-MM-DD --commit FULL_COMMIT
+```
+
+The publisher prepares the curated asset and notes, uses an annotated tag, then
+verifies downloaded asset bytes. It creates no skill-feedback issues. Issue
+creation always follows the playbook's approval of the exact public-safe draft.

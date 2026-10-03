@@ -12,7 +12,8 @@ machine pin, snapshot lineage and discovery authorization; briefing owns purpose
 scope and constraints; decisions owns durable outcomes, authority and provenance;
 glossary owns shared terms; PROJECT_STATE owns semantic progress, blockers and next
 action; subjects own design; maps own authorized questions; sources own unchanged
-original reference material. See the [format](../workspace-format.md).
+original reference material. Optional context/skill-feedback.md owns retained skill
+feedback, public-safe issue drafts, approval provenance, and confirmed issue URLs. See the [format](../workspace-format.md).
 
 Reconcile each owning document before validation. Keep continuation notes short
 and actionable. Remove resolved notes after preserving durable material. Preserve
@@ -27,6 +28,9 @@ Manual checks before packaging:
   Optional deferrals are reasoned, and no necessary decision was omitted from the map.
 - Human state agrees with map outcomes and machine discovery authorization.
 - Original supplied sources match their original bytes; local links resolve.
+- When a slice is closing, its [skill improvement review](skill-improvement.md)
+  has been performed. Retain useful pending drafts or failed filings for retry;
+  unresolved feedback does not block an otherwise complete slice or export.
 - Continuation notes describe current blockers and one useful next action, without
   stale resolved tasks or reliance on old conversations.
 

@@ -1,4 +1,24 @@
-# v0.1.0 validation record
+# Validation history
+
+## v0.2.0 validation
+
+21 local acceptance tests pass, including a missing issue-template regression.
+The curated bundle contains the new playbook and reusable issue template. Both
+fixture workspaces validate with bundle 0.2.0 while retaining format 0.1.0.
+Offline candidate preparation through scripts/release_v020.py passes.
+
+Two independent read-only walkthroughs exercised closing a completed slice with
+declined feedback and unavailable GitHub, then closing completed decisions while
+export was blocked and issue approval had not been given. Neither claimed to file
+an issue; the declined draft stayed declined, and the new finding remained a
+public-safe draft. These are conversational walkthroughs, not automated proof of
+future agent compliance.
+
+The publisher validates the release on four Linux/Windows, Python 3.10/3.13 jobs
+before creating the tag and release, then downloads and compares the asset and
+checksum bytes. Actual remote outcomes belong in the workflow run and release.
+
+## v0.1.0 validation record
 
 ## Automated acceptance
 

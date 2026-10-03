@@ -2,10 +2,10 @@
 
 **FIXTURE: synthetic pin, not a live release; do not use for procedural resume.**
 
-This workspace uses Design Baton 0.1.0, pinned to commit `1111111111111111111111111111111111111111`.
+This workspace uses Design Baton 0.2.0, pinned to commit `1111111111111111111111111111111111111111`.
 Read the [pinned SKILL.md](https://github.com/jimzord12/design-baton/blob/1111111111111111111111111111111111111111/skills/design-baton/SKILL.md)
 and follow its session-entry route. Obtain shared playbooks from this exact commit;
-do not automatically substitute a newer bundle. [Matching release](https://github.com/jimzord12/design-baton/releases/tag/v0.1.0).
+do not automatically substitute a newer bundle. [Matching release](https://github.com/jimzord12/design-baton/releases/tag/v0.2.0).
 
 Unzip this bundle and read README.md. The project records carry all necessary
 project context; earlier conversations and previous snapshots are not needed.

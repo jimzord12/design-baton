@@ -17,6 +17,7 @@ import zipfile
 REPO = Path(__file__).resolve().parents[1]
 CLI = REPO / 'skills/design-baton/scripts/baton.py'
 PIN = '1' * 40
+BUNDLE_VERSION = json.loads((REPO / 'skills/design-baton/versions.json').read_text())['bundle_version']
 
 
 class BatonTests(unittest.TestCase):
@@ -235,7 +236,7 @@ class BatonTests(unittest.TestCase):
         self.run_cli('validate-bundle')
         out = self.base / 'packages'
         self.run_cli('package-skill', '--output-dir', out, '--date', '2026-10-03')
-        archive = out / 'design-baton-v0.1.0.zip'
+        archive = out / f'design-baton-v{BUNDLE_VERSION}.zip'
         before = archive.read_bytes()
         self.run_cli('package-skill', '--output-dir', out, '--date', '2026-10-03')
         self.assertEqual(before, archive.read_bytes())
@@ -244,6 +245,8 @@ class BatonTests(unittest.TestCase):
         with zipfile.ZipFile(archive) as z:
             self.assertIn('design-baton/SKILL.md', z.namelist())
             self.assertIn('design-baton/LICENSE', z.namelist())
+            self.assertIn('design-baton/references/playbooks/skill-improvement.md', z.namelist())
+            self.assertIn('design-baton/assets/skill-improvement-issue.md', z.namelist())
             self.assertFalse(any('/tests/' in n or '__pycache__' in n for n in z.namelist()))
 
     def test_archive_integrity_and_documented_limits(self):
@@ -291,6 +294,17 @@ class BatonTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('broken local link', result.stderr)
 
+    def test_bundle_rejects_missing_feedback_template(self):
+        bundle = self.base / 'skill'
+        shutil.copytree(REPO / 'skills/design-baton', bundle)
+        shutil.copy2(REPO / 'LICENSE', bundle / 'LICENSE')
+        (bundle / 'assets/skill-improvement-issue.md').unlink()
+        result = subprocess.run([sys.executable, str(bundle / 'scripts/baton.py'),
+                                 'validate-bundle'], capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('broken local link', result.stderr)
+        self.assertIn('skill-improvement-issue', result.stderr)
+
     def test_exact_pin_tag_mismatch_and_newer_main_are_detected(self):
         # This Git history is a synthetic local repository, never a live release.
         local = self.base / 'procedure'
@@ -309,7 +323,7 @@ class BatonTests(unittest.TestCase):
         git('add', '.')
         git('commit', '-m', 'Synthetic initial bundle')
         first = git('rev-parse', 'HEAD')
-        git('tag', '-a', 'v0.1.0', '-m', 'Synthetic tag')
+        git('tag', '-a', 'v' + BUNDLE_VERSION, '-m', 'Synthetic tag')
         self.run_cli('init', self.root, '--slug', 'sample', '--title', 'Synthetic pin check',
                      '--date', '2026-10-03', '--commit', first)
         self.run_cli('validate-workspace', self.root, '--procedure-root', local)

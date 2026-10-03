@@ -24,7 +24,7 @@ ENTRY = 'skills/design-baton/SKILL.md'
 CORE = ('README.md', 'baton.json', 'PROJECT_STATE.md', 'context/briefing.md',
         'context/decisions.md', 'context/glossary.md')
 COMPONENTS = {'session-lifecycle', 'decisions-tree', 'snapshots', 'upgrades',
-              'workspace-format', 'toolkit'}
+              'workspace-format', 'toolkit', 'skill-improvement'}
 EXCLUDED = {'.git', '__pycache__', '.pytest_cache', '.venv', 'node_modules',
             'dist', 'build', 'exports', 'output', '.superpowers'}
 MAX_MEMBERS = 2000
@@ -158,10 +158,10 @@ def collect(root):
     return files
 
 
-def markdown_links(files):
+def markdown_links(files, skip_prefixes=()):
     """Check relative inline/image and reference links, including normalized parent links."""
     for name, raw in files.items():
-        if not name.endswith('.md'):
+        if not name.endswith('.md') or any(name.startswith(prefix) for prefix in skip_prefixes):
             continue
         try:
             content = raw.decode('utf-8')
@@ -449,7 +449,7 @@ def inspect_archive(path, allow_fixture=False):
 def bundle_files():
     allowed = {'SKILL.md', 'agents/openai.yaml', 'versions.json'}
     files = {}
-    for directory in ('references', 'assets/workspace', 'scripts'):
+    for directory in ('references', 'assets', 'scripts'):
         for name, raw in collect(SKILL / directory).items():
             files[f'{directory}/{name}'] = raw
     for name in allowed:
@@ -492,8 +492,7 @@ def validate_bundle():
     # Templates are unpublished output assets; validate after substitution, not as live pins.
     template = parse_json(files['assets/workspace/baton.json'], 'template')
     require(template['procedure']['commit'] is None, 'starter template must not contain a fake commit')
-    check = {n: raw for n, raw in files.items() if not n.startswith('assets/')}
-    markdown_links(check)
+    markdown_links(files, skip_prefixes=('assets/',))
     with tempfile.TemporaryDirectory() as temp:
         init_workspace(Path(temp) / 'bundle-check', 'bundle-check', 'Bundle check', '2026-10-03', '1' * 40, True)
     return files

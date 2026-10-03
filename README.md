@@ -11,10 +11,10 @@ authorization, records durable outcomes, and exports complete continuation ZIPs
 when you ask to pause or close. It works for application design, workshop planning
 and other domains without imposing a fixed subject taxonomy.
 
-## First release
+## Current release
 
-[v0.1.0 release and downloadable assets](https://github.com/jimzord12/design-baton/releases/tag/v0.1.0)
-contains the installable `design-baton-v0.1.0.zip`, SHA-256 checksum, and a separate
+[v0.2.0 release and downloadable assets](https://github.com/jimzord12/design-baton/releases/tag/v0.2.0)
+contains the installable `design-baton-v0.2.0.zip`, SHA-256 checksum, and a separate
 fictional sample continuation ZIP pinned to the exact released commit.
 
 The source repository and GitHub's automatic source archive include maintainer
@@ -25,8 +25,8 @@ environment's supported installation workflow if you choose to install it.
 
 Read [SKILL.md](skills/design-baton/SKILL.md) for routing and the
 [workspace format](skills/design-baton/references/workspace-format.md) for contracts.
-The four playbooks cover session lifecycle, the **Decisions Tree Protocol**,
-snapshots, and explicit upgrades. [versions.json](skills/design-baton/versions.json)
+The five playbooks cover session lifecycle, the **Decisions Tree Protocol**,
+owner-approved skill improvement, snapshots, and explicit upgrades. [versions.json](skills/design-baton/versions.json)
 is the authoritative bundle/component manifest.
 
 ## Try it locally
@@ -36,7 +36,7 @@ needed for workspace operations after the exact skill has been obtained.
 From a Git checkout at the release (PowerShell):
 
 ```powershell
-$pin = git rev-parse 'v0.1.0^{commit}'
+$pin = git rev-parse 'v0.2.0^{commit}'
 python skills/design-baton/scripts/baton.py init ../my-project --slug my-project --title 'My project' --date 2026-10-03 --commit $pin
 python skills/design-baton/scripts/baton.py validate-workspace ../my-project --procedure-root .
 python skills/design-baton/scripts/baton.py snapshot ../my-project --initial --date 2026-10-03 --output-dir ../baton-exports
@@ -71,6 +71,16 @@ python skills/design-baton/scripts/baton.py package-skill --date 2026-10-03 --ou
 [Validation record](docs/validation.md) distinguishes automated checks from
 conversational walkthroughs. CI runs tests and bundle/example validation on
 Linux and Windows. Runtime ZIP inspection never extracts unsafe members.
+
+## Improve the procedure
+
+Before closing a slice, the agent briefly reviews observed Design Baton friction
+and worthwhile enhancements. Meaningful findings are discussed with you and
+checked against existing issues. A complete public-safe issue draft is shown
+before filing; only your approval of that issue authorizes creation. Pending or
+declined feedback does not block slice completion. Filing does not authorize
+implementation or change an existing project pin. See the
+[skill improvement playbook](skills/design-baton/references/playbooks/skill-improvement.md).
 
 ## Versioning and boundaries
 

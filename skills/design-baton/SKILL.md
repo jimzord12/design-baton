@@ -1,6 +1,6 @@
 ---
 name: design-baton
-description: Guide AI-assisted project design across conversations with bounded decision slices, durable agreements, and versioned continuation bundles. Use to start or resume design, authorize decision discovery, pause or export a project, or explicitly upgrade its procedure.
+description: Guide AI-assisted project design across conversations with bounded decision slices, durable agreements, and versioned continuation bundles. Use to start or resume design, authorize decision discovery, close a slice and review skill feedback, pause or export a project, or explicitly upgrade its procedure.
 ---
 
 # Design Baton
@@ -16,6 +16,7 @@ development framework. Follow the owner's chosen scope.
 | --- | --- | --- |
 | Start or resume design | [Session lifecycle](references/playbooks/session-lifecycle.md) | Briefed agent, selected slice, visible completion target |
 | Explicit discovery authorization or working an existing map | [Decisions Tree Protocol](references/playbooks/decisions-tree.md) | Bounded map and recorded leaf outcomes |
+| Review skill friction before slice closure | [Skill improvement](references/playbooks/skill-improvement.md) | Evidence-backed feedback and owner-approved issue drafts |
 | Pause, close or export | [Snapshots](references/playbooks/snapshots.md) | Reconciled workspace and complete continuation ZIP |
 | Explicit procedure version change | [Upgrades](references/playbooks/upgrades.md) | Reviewed compatibility and intentional pin change |
 
@@ -84,6 +85,16 @@ Work through a manageable subset of leaves and test boundaries with concrete cas
 Resolved leaves link to durable decision IDs. Optional decisions may be deferred
 with reasons. Any unresolved decision necessary for the slice target prevents
 completion, including necessary decisions omitted from the map.
+
+## Review skill feedback at slice closure
+
+Use [Skill improvement](references/playbooks/skill-improvement.md) before closing
+a slice. Briefly review observed friction and worthwhile enhancements, discuss
+meaningful findings with the owner, check existing issues, and show the complete
+public-safe draft before filing. Only explicit approval of that issue authorizes
+creation; protocol adoption or slice closure is insufficient. Pending feedback
+does not block an otherwise complete slice. Filing is not implementation authority.
+Preserve pending drafts and confirmed issue URLs without repeatedly filing them.
 
 ## Maintain the project workspace
 
